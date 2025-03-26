@@ -2,45 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Audio Player</title>
+  <title>Audio</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       background: transparent;
     }
-    #wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-    }
     audio {
+      display: block;
       width: 100%;
       max-width: 320px;
+      height: 30px;
     }
   </style>
 </head>
 <body>
-  <div id="wrapper">
-    <audio controls id="player">
-      Your browser does not support the audio element.
-    </audio>
-  </div>
+  <audio controls id="player"></audio>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const file = params.get('file');
-
     if (file) {
       const player = document.getElementById('player');
       const source = document.createElement('source');
       source.src = file;
-      source.type = 'audio/mpeg'; // you can add logic for .ogg if needed
+      source.type = 'audio/mpeg';
       player.appendChild(source);
       player.load();
-    } else {
-      document.getElementById('wrapper').innerHTML = "<p>No audio file specified.</p>";
     }
   </script>
 </body>
