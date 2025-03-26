@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Player</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    audio {
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <audio controls id="player">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Get the 'file' parameter from the URL
+    const params = new URLSearchParams(window.location.search);
+    const file = params.get('file');
+
+    if (file) {
+      const player = document.getElementById('player');
+      const source = document.createElement('source');
+      source.src = file;
+      source.type = 'audio/mpeg'; // or 'audio/ogg' dynamically if needed
+      player.appendChild(source);
+      player.load();
+    } else {
+      document.body.innerHTML = "<p style='text-align:center;'>No audio file specified in the URL.</p>";
+    }
+  </script>
+</body>
+</html>
